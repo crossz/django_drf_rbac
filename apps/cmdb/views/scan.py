@@ -11,7 +11,7 @@ from utils.common import ConfigFileMixin
 from common.custom import RbacPermission, CommonPagination, CeleryTools
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from ruamel import yaml
 from rest_framework import status
 from ..models import DeviceScanInfo,DeviceInfo,DeviceAbstract,ConnectionAbstract,ConnectionInfo
@@ -29,7 +29,7 @@ class ScanSettingView(APIView, ConfigFileMixin):
     perms_map = ({'*': 'admin'}, {'*': 'asset_all'})
     config_file = os.path.join(settings.YML_CONF_DIR, 'scan_settings.yml')
     permission_classes = (RbacPermission,)
-    authentication_classes = (JWTAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
 
     def get(self, request, format=None):
         return Response(self.get_conf_content())
@@ -61,7 +61,7 @@ class ScanExcuView(APIView, CeleryTools):
     '''
     perms_map = ({'*': 'admin'}, {'*': 'scan_all'})
     permission_classes = (RbacPermission,)
-    authentication_classes = (JWTAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
 
     def post(self, request, format=None):
         request_status = None
@@ -86,8 +86,8 @@ class ScanExcuView(APIView, CeleryTools):
         elif request.data['excu'] == 'inbound':
             login_succeed = list(DeviceScanInfo.objects.filter(status='Succeed').values())
             if login_succeed:
-                device_fields = [field.name for field in DeviceAbstract._meta.fields if field.name is not 'id']
-                connection_fields = [field.name for field in ConnectionAbstract._meta.fields if field.name is not 'id']
+                device_fields = [field.name for field in DeviceAbstract._meta.fields if field.name != 'id']
+                connection_fields = [field.name for field in ConnectionAbstract._meta.fields if field.name != 'id']
                 device_fields.append('auth_type')
                 for host in login_succeed:
                     device_defaults = {key: host[key] for key in host.keys() & device_fields}
@@ -131,7 +131,7 @@ class DeviceScanInfoViewSet(ListModelMixin, DestroyModelMixin,RetrieveModelMixin
     filter_fields = ('status',)
     search_fields = ('sys_hostname', 'hostname', 'os_type')
     ordering_fields = ('id',)
-    authentication_classes = (JWTAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
 
     def get_serializer_class(self):
         # 根据请求类型动态变更serializer

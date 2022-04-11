@@ -5,7 +5,7 @@ from ..models import Menu
 from ..serializers.menu_serializer import MenuSerializer
 from common.custom import CommonPagination,RbacPermission,TreeAPIView
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 
 class MenuViewSet(ModelViewSet, TreeAPIView):
@@ -20,7 +20,7 @@ class MenuViewSet(ModelViewSet, TreeAPIView):
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('name',)
     ordering_fields = ('sort',)
-    authentication_classes = (JWTAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (RbacPermission,)
 
 

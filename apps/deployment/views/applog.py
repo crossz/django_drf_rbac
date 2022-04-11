@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_xops.basic import XopsResponse
 from rest_xops.code import *
 from common.custom import RbacPermission
-from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from utils.shell_excu import connect_init
 from django.http import FileResponse
 from rest_framework.renderers import BaseRenderer
@@ -25,7 +25,7 @@ class AppLogView(APIView):
     '''
     perms_map = ({'*': 'admin'}, {'*': 'deploy_all'}, {'post': 'applog_list'})
     permission_classes = (RbacPermission,)
-    authentication_classes = (JWTAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
 
     def post(self, request, format=None):
         if request.data['excu'] == 'list':

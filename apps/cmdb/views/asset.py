@@ -6,7 +6,7 @@ from ..serializers.asset_serializer import DeviceInfoSerializer, DeviceInfoListS
 from common.custom import CommonPagination, RbacPermission
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from ..models import DeviceInfo
 from deployment.models import Project
@@ -29,7 +29,7 @@ class DeviceInfoViewSet(ModelViewSet):
     filter_fields = ('status','os_type', 'device_type', 'groups', 'businesses', 'labels')
     search_fields = ('hostname', 'os_type')
     ordering_fields = ('id',)
-    authentication_classes = (JWTAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (RbacPermission,)
 
     def get_serializer_class(self):
@@ -61,5 +61,5 @@ class DeviceListView(ListAPIView):
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filter_fields = ('os_type',)
     ordering_fields = ('id',)
-    authentication_classes = (JWTAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (IsAuthenticated,)

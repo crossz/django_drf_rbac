@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from ..serializers.dict_serializer import DictSerializer, DictTreeSerializer
 from common.custom import CommonPagination, RbacPermission, TreeAPIView
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 class DictViewSet(ModelViewSet):
     '''
@@ -21,7 +21,7 @@ class DictViewSet(ModelViewSet):
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('key', 'value')
     ordering_fields = ('id',)
-    authentication_classes = (JWTAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (RbacPermission,)
 
     def list(self, request, *args, **kwargs):
