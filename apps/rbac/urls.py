@@ -4,12 +4,12 @@ from cmdb.views import dict
 from rest_framework import routers
 
 router = routers.SimpleRouter()
-router.register(r'users', user.UserViewSet, base_name="users")
-router.register(r'organizations', organization.OrganizationViewSet, base_name="organization")
-router.register(r'menus', menu.MenuViewSet, base_name="menus")
-router.register(r'permissions', permission.PermissionViewSet, base_name="permissions")
-router.register(r'roles', role.RoleViewSet, base_name="roles")
-router.register(r'dicts', dict.DictViewSet, base_name="dicts")
+router.register(r'users', user.UserViewSet, basename="users")
+router.register(r'organizations', organization.OrganizationViewSet, basename="organization")
+router.register(r'menus', menu.MenuViewSet, basename="menus")
+router.register(r'permissions', permission.PermissionViewSet, basename="permissions")
+router.register(r'roles', role.RoleViewSet, basename="roles")
+router.register(r'dicts', dict.DictViewSet, basename="dicts")
 
 urlpatterns = [
     path(r'api/', include(router.urls)),

@@ -5,7 +5,7 @@ from ..models import Permission
 from ..serializers.permission_serializer import PermissionListSerializer
 from common.custom import CommonPagination, RbacPermission, TreeAPIView
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class PermissionViewSet(ModelViewSet, TreeAPIView):
@@ -20,7 +20,7 @@ class PermissionViewSet(ModelViewSet, TreeAPIView):
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('name',)
     ordering_fields = ('id',)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (RbacPermission,)
 
 

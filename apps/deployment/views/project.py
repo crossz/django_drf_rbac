@@ -6,7 +6,7 @@ from ..models import Project
 from ..serializers.project_serializer import ProjectSerializer, ProjectListSerializer
 from common.custom import CommonPagination, RbacPermission
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q
 from rest_xops.code import *
@@ -29,7 +29,7 @@ class ProjectViewSet(ModelViewSet):
     filter_fields = ('environment', 'status',)
     search_fields = ('name',)
     ordering_fields = ('id',)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (RbacPermission,)
 
     def get_serializer_class(self):
@@ -54,7 +54,7 @@ class ProjectViewSet(ModelViewSet):
 class ProjectCopy(APIView):
     perms_map = ({'*': 'admin'}, {'*': 'project_all'})
     permission_classes = (RbacPermission,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
 
     def post(self, request, format=None):
         if request.data['id']:

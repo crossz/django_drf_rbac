@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 from ..serializers.connection_serializer import ConnectionInfoSerializer
 from common.custom import CommonPagination, RbacPermission, ObjPermission
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from ..models import ConnectionInfo
 from rest_xops.basic import XopsResponse
 from rest_xops.code import *
@@ -22,7 +22,7 @@ class ConnectionInfoViewSet(ModelViewSet):
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('hostname',)
     ordering_fields = ('id',)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (RbacPermission,ObjPermission)
 
     def create(self, request, *args, **kwargs):

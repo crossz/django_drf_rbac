@@ -5,7 +5,7 @@ from ..models import Organization
 from ..serializers.organization_serializer import OrganizationSerializer, OrganizationUserTreeSerializer
 from common.custom import CommonPagination, RbacPermission, TreeAPIView
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
 from rest_xops.basic import XopsResponse
 from rest_framework.permissions import IsAuthenticated
@@ -23,7 +23,7 @@ class OrganizationViewSet(ModelViewSet, TreeAPIView):
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('name')
     ordering_fields = ('id',)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (RbacPermission,)
 
 
@@ -38,7 +38,7 @@ class OrganizationUserTreeView(APIView):
     '''
     组织架构关联用户树
     '''
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, format=None):

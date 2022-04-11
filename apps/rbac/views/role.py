@@ -6,7 +6,7 @@ from ..models import Role
 from ..serializers.role_serializer import RoleListSerializer, RoleModifySerializer
 from common.custom import CommonPagination, RbacPermission
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class RoleViewSet(ModelViewSet):
@@ -21,7 +21,7 @@ class RoleViewSet(ModelViewSet):
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('name',)
     ordering_fields = ('id',)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (RbacPermission,)
 
     def get_serializer_class(self):

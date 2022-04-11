@@ -7,7 +7,7 @@ from rest_xops.basic import XopsResponse
 from ..models import Project, DeployRecord
 from cmdb.models import DeviceInfo, ConnectionInfo
 from utils.shell_excu import Shell, connect_init
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 import os, logging, time
 from common.custom import CommonPagination, RbacPermission
 from rest_framework.filters import OrderingFilter
@@ -35,14 +35,14 @@ class DeployRecordViewSet(ReadOnlyModelViewSet):
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filter_fields = ('project_id', 'status',)
     ordering_fields = ('id',)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (RbacPermission,)
 
 
 class VersionView(APIView):
     perms_map = ({'*': 'admin'}, {'*': 'deploy_all'}, {'get': 'deploy_excu'})
     permission_classes = (RbacPermission,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     _path = settings.WORKSPACE
 
     def get_tag(self, path):
@@ -81,7 +81,7 @@ class DeployView(APIView):
     '''
     perms_map = ({'*': 'admin'}, {'*': 'deploy_all'}, {'post': 'deploy_excu'})
     permission_classes = (RbacPermission,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     _path = settings.WORKSPACE
 
     def repo_init(self, id):

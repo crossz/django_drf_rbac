@@ -1,8 +1,8 @@
 echo "Upgrading rest_xops"
 echo "----------------"
 cd $(dirname $0)
-echo -e "\033[33m 获取更新\033[0m"
-git pull
+# echo -e "\033[33m 获取更新\033[0m"
+# git pull
 echo -e "\033[33m app更新\033[0m"
 dir=$(ls -l apps/ |awk '/^d/ {print $NF}')
 for i in $dir

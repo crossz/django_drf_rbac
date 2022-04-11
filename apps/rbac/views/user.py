@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 from rest_xops.basic import XopsResponse
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth import authenticate
 from rest_framework_jwt.settings import api_settings
 from rest_framework.permissions import IsAuthenticated
@@ -298,7 +298,7 @@ class UserViewSet(ModelViewSet):
     filter_fields = ('is_active',)
     search_fields = ('username', 'name', 'mobile', 'email')
     ordering_fields = ('id',)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (RbacPermission,)
 
     def get_serializer_class(self):
@@ -368,5 +368,5 @@ class UserListView(ListAPIView):
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filter_fields = ('name',)
     ordering_fields = ('id',)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)

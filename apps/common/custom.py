@@ -3,7 +3,7 @@
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import BasePermission
 from rest_framework import serializers
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_xops.basic import XopsResponse
 from rest_framework.generics import ListAPIView
@@ -91,7 +91,7 @@ class TreeAPIView(ListAPIView):
     自定义树结构View
     '''
     serializer_class = TreeSerializer
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def list(self, request, *args, **kwargs):
