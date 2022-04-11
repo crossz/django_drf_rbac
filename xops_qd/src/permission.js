@@ -12,6 +12,9 @@ const whiteList = ['/login']// no redirect whitelist
 
 router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
+
+  console.log(getToken())
+
   if (getToken()) {
     // 已登录且要跳转的页面是登录页
     if (to.path === '/login') {

@@ -39,6 +39,7 @@ class UserAuthView(APIView):
         user = authenticate(username=username, password=password)
         if user:
             payload = jwt_payload_handler(user)
+            print(jwt.encode(payload, SECRET_KEY))
             return XopsResponse({'token': jwt.encode(payload, SECRET_KEY)},status=OK)
         else:
             return XopsResponse('用户名或密码错误!', status=BAD)
@@ -60,6 +61,7 @@ class UserInfoView(APIView):
             return None
 
     def get(self, request):
+        print(request.user)
         if request.user.id is not None:
             perms = self.get_permission_from_role(request)
             data = {

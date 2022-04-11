@@ -65,6 +65,7 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         const user = { username: this.loginForm.username, password: this.loginForm.password, rememberMe: this.loginForm.rememberMe }
+        console.log(user)
         if (valid) {
           this.loading = true
           if (user.rememberMe) {
@@ -76,7 +77,7 @@ export default {
           }
           this.$store.dispatch('Login', user).then(() => {
             this.loading = false
-            this.$router.push({ path: this.redirect || '/' })
+            // this.$router.push({ path: this.redirect || '/' })
           }).catch(() => {
             this.loading = false
           })
