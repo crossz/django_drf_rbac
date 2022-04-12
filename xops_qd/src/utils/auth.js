@@ -8,7 +8,6 @@ export function getToken() {
 
 export function setToken(token, rememberMe) {
   if (rememberMe) {
-    console.log(token)
     return Cookies.set(TokenKey, token, { expires: 1 })
   } else return Cookies.set(TokenKey, token)
 }

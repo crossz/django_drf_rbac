@@ -28,6 +28,8 @@ const user = {
       state.avatar = avatar
     },
     SET_ROLES: (state, roles) => {
+      console.log('----==== set roles ====-----')
+      console.log(roles)
       state.roles = roles
     },
     SET_CREATE_TIME: (state, createTime) => {

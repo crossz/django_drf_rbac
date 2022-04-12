@@ -1,10 +1,16 @@
-**因个人原因，目前开发暂停，坑挖了目前没时间填，，实在意料之外，目前已完成的功能大部分都是完整，项目建议仅作交流学习。**
+# RBAC for Django and DRF
 
-**新坑项目地址：https://github.com/xufqing/anew-server ，后端：golang 、gin、gormV2、go-redis、websocket 前端：react hooks 、antd v4**
+基于 Django (和 Django Rest Framework, JWT) 构建 RBAC.
 
-demo地址: http://demo.xufqing.cn
+在利用第三方插件或者 Oauth 2 的服务之前, 先通过 django 实现一次 RBAC 的逻辑.
+## Original
+借鉴 
+[rest_xops](https://github.com/xufqing/rest_xops)
+项目, 从中提取出 RBAC 功能, 此项目到 2022 年 4 月, 已经年久失修, django 2, vue 2.5, 大量依赖已经 deprecated, 但是仔细调教, 仍然能跑起来, 接下来将逐步将此项目进行升级.
 
-每两小时还原数据
+以下各种描述都是截止于 [rest_xops](https://github.com/xufqing/rest_xops) 之前的进展.
+
+## Ex-project 进展程度(已停更)
 
 管理员账号:admin 密码admin@1234
 
