@@ -196,6 +196,7 @@ USE_L10N = True
 
 USE_TZ = False
 
+# Substituting a custom User model, your code will not work in projects where the AUTH_USER_MODEL setting has been changed to a different user model.
 AUTH_USER_MODEL = 'rbac.UserProfile'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

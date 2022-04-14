@@ -10,6 +10,23 @@
 
 以下各种描述都是截止于 [rest_xops](https://github.com/xufqing/rest_xops) 之前的进展.
 
+## Progress
+
+- [x] 修复 AUTH_USER_MODEL, 使得在 admin 页面可以管理自定义的 rbac 的 user 表. (always use a custom user model for all new Django projects.)
+- [ ] 升级 django 到 v4, 包括 djangorestframework-simplejwt 的替换.
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+---
+
+
 ## Ex-project 进展程度(已停更)
 
 管理员账号:admin 密码admin@1234
