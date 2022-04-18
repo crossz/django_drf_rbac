@@ -14,6 +14,7 @@
 
 - [x] 修复 AUTH_USER_MODEL, 使得在 admin 页面可以管理自定义的 rbac 的 user 表. (always use a custom user model for all new Django projects.)
 - [ ] 升级 django 到 v4, 包括 djangorestframework-simplejwt 的替换.
+- [ ] 集成 django-organizations，以便管理采用 saas 服务的企业/机构.
 
 
 
@@ -62,7 +63,7 @@
 - [ ] SQL作业平台
 - ...........
 
-***本项目采用以下技术***
+*** fork 过来的项目是采用以下技术，这些都需要之后升级 ***
 
 前端：
 
@@ -128,35 +129,21 @@ python manage.py changepassword admin
 
 4、安装redis（略）
 
-5、创建python虚拟环境
+5、创建python虚拟环境, pipenv
 
 - 安装  
 yum install git gcc make patch gdbm-devel openssl-devel sqlite-devel readline-devel zlib-devel bzip2-devel libffi-devel -y  
 
 - 多版本管理工具
-1. 安装Pyenv 
-
+1. 安装pipenv 
 ```
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash  
-
-echo 'export PATH="/$HOME/.pyenv/bin:$PATH"'>> ~/.bash_profile
-echo 'eval "$(pyenv init -)"' >> ~/.bash_profile 
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bash_profile 
-pyenv install 3.6.8 -v
-pyenv virtualenv 3.6.8 rest_xops
-cd 你的项目路径
-pyenv local rest_xops
+pip3 install pipenv
 ```
- ***设置pip国内阿里源（可选）***
-> ***mkdir ~/.pip***  
-> ***touch ~/.pip/pip.conf***  
-> ***echo "[global]">>~/.pip/pip.conf***  
-> ***echo "index-url=https://mirrors.aliyun.com/pypi/simple/">>~/.pip/pip.conf***  
-> ***echo "trusted-host=mirrors.aliyun.com">>~/.pip/pip.conf***  
-
 2、安装项目运行模块
 ```
-pip install -r requirements.txt
+# pipenv --python 3.9
+pipenv shell
+pipenv install -r requirements.txt
 ```
 3、修改配置
 ```
@@ -282,7 +269,7 @@ supervisorctl start all
 
 运行前端
 ```
-cd rest_xops/xops_qd
+cd ./xops_qd
 npm run dev
 #接下来启动后端即可进行调试
 ```
@@ -419,4 +406,4 @@ server {
     }
 }
 ```
-最后 http://demo.xufqing.cn（你的地址）登陆访问
+
